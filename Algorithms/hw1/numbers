@@ -1,0 +1,6 @@
+number = input()
+sum,pow = 0, 1
+for i in number:
+  sum += int(i)
+  pow += int(i)
+print( f'Сумма цифр числа = {sum}, произведение цифр числа = {pow}')

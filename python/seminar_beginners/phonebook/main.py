@@ -1,6 +1,11 @@
 import json
 from contact import Contact
 
+# def save():
+#     with open(Phone_book.json, "a", encoding = 'utf-8') as ph:
+#         ph.write(json.dumps(Phone_book, ensure_ascii = False))
+#         print("Контакт сохранен")
+
 commands = {'/help': 'Покажи все команды', '/add': 'Добавить контакт', '/search': 'Поиск по контактам', '/remove': 'Удалить контакт', '/show': 'Показать все контакты', '/quit': 'Закрыть книгу'}
 
 print('Добро пожаловать в телефонную книгу!')
@@ -16,6 +21,7 @@ command = input('Введите искомую команду: ')
 while(command != '/quit'):
     if command == '/help':
         [print(f'{key} - {value}') for key, value in commands.items()]
+
     elif command == '/add':
         print('Введите нужную информацию о контакте')
         name = input('Введите имя контакта: ')
@@ -24,16 +30,28 @@ while(command != '/quit'):
         email = input('Введите почту контакта: ')
         adress = input('Введите адрес контакта: ')
         Phone_book.append(Contact(name, phone, birthday, email, adress))
+
     elif command == '/search':
         data = input('Введите данные для поиска: ')
         for person in Phone_book:
             Contact.search(person, data)
+
     elif command == '/remove':
         rm = input('Введите данные для удаления: ')
+        for person in Phone_book:
+            flag = Contact.search(person, rm)
+            if flag == True:
+                answer = input('Вы хотите удалить этого человека? Yes/No ')
+                if answer.lower() == 'yes':
+                    Phone_book.remove(person)
+                    break
+
     elif command == '/show':
          for person in Phone_book:
             Contact.print(person)   
+
     else:
         print('Введите одну из представленных ниже команд для работы:')
         [print(f'{key} - {value}') for key, value in commands.items()]
+        
     command = input('Введите искомую команду: ')

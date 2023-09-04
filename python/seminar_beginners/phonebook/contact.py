@@ -9,7 +9,8 @@ class Contact:
     
     def search(person, data):
         if data in person.name or data in person.phone_number:
-            print(f'ФИО: {person.name}, Телефонный номер: {person.phone_number}, Дата рождения: {person.birthday}, Почта: {person.mail}, Адрес: {person.adress}')
+            Contact.print(person)
+            return True
 
     def print(self):
         print(f'ФИО: {self.name}, Телефонный номер: {self.phone_number}, Дата рождения: {self.birthday}, Почта: {self.mail}, Адрес: {self.adress}')

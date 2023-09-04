@@ -1,13 +1,15 @@
 import json
-from contact import Phone_book
+from contact import Contact
 
 commands = {'/help': 'Покажи все команды', '/add': 'Добавить контакт', '/search': 'Поиск по контактам', '/remove': 'Удалить контакт', '/show': 'Показать все контакты', '/quit': 'Закрыть книгу'}
 
-print('Добро пожаловать в телефонную книгу! Введите одну из представленных ниже команд для работы:')
+print('Добро пожаловать в телефонную книгу!')
+print('Введите одну из представленных ниже команд для работы:')
 [print(f'{key} - {value}') for key, value in commands.items()]
 
-Phone_book('Зоя', '+77863456', '21/10/2000', 'dfgh@sg.ru', '190000 SPb')
-Phone_book('Клава', '546', '14/10/2000', 'spb@sg.ru', '190000 SPb')
+Phone_book = []
+Phone_book.append(Contact('Зоя', '+77863546', '21/10/2000', 'dfgh@sg.ru', '190000 SPb'))
+Phone_book.append(Contact('Клава', '546', '14/10/2000', 'spb@sg.ru', '190000 SPb'))
 
 command = input('Введите искомую команду: ')
 
@@ -21,14 +23,16 @@ while(command != '/quit'):
         birthday = input('Введите дату рождения контакта: ') 
         email = input('Введите почту контакта: ')
         adress = input('Введите адрес контакта: ')
-        Phone_book(name, phone, birthday, email, adress)
+        Phone_book.append(Contact(name, phone, birthday, email, adress))
     elif command == '/search':
-        search = input('Введите данные для поиска: ')
-        Phone_book.search(search)
+        data = input('Введите данные для поиска: ')
+        for person in Phone_book:
+            Contact.search(person, data)
     elif command == '/remove':
         rm = input('Введите данные для удаления: ')
-    # elif command == '/show':
-    #     [Contact.print(person) for person in Contact()]
+    elif command == '/show':
+         for person in Phone_book:
+            Contact.print(person)   
     else:
         print('Введите одну из представленных ниже команд для работы:')
         [print(f'{key} - {value}') for key, value in commands.items()]

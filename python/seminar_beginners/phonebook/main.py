@@ -1,11 +1,6 @@
 import json
 from contact import Contact
 
-def save(person):
-    with open('Phone_book.json', "w", encoding = 'utf-8') as outfile:
-       json.dump(person, outfile)
-       print("Контакт сохранен")
-
 with open('Phone_book.json', "r") as outfile:
     Phone_book = json.load(outfile)
 
@@ -32,9 +27,9 @@ while(command != '/quit'):
         birthday = input('Введите дату рождения контакта: ') 
         email = input('Введите почту контакта: ')
         adress = input('Введите адрес контакта: ')
-        
+
         Phone_book.append(Contact(name, phone, birthday, email, adress))
-        save(Contact(name, phone, birthday, email, adress))
+        Contact.save(name, phone, birthday, email, adress)
 
     elif command == '/search':
         data = input('Введите данные для поиска: ')

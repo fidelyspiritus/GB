@@ -1,10 +1,13 @@
 import json
 from contact import Contact
 
-# def save():
-#     with open(Phone_book.json, "a", encoding = 'utf-8') as ph:
-#         ph.write(json.dumps(Phone_book, ensure_ascii = False))
-#         print("Контакт сохранен")
+def save(person):
+    with open('Phone_book.json', "w", encoding = 'utf-8') as outfile:
+       json.dump(person, outfile)
+       print("Контакт сохранен")
+
+with open('Phone_book.json', "r") as outfile:
+    Phone_book = json.load(outfile)
 
 commands = {'/help': 'Покажи все команды', '/add': 'Добавить контакт', '/search': 'Поиск по контактам', '/remove': 'Удалить контакт', '/show': 'Показать все контакты', '/quit': 'Закрыть книгу'}
 
@@ -12,9 +15,9 @@ print('Добро пожаловать в телефонную книгу!')
 print('Введите одну из представленных ниже команд для работы:')
 [print(f'{key} - {value}') for key, value in commands.items()]
 
-Phone_book = []
-Phone_book.append(Contact('Зоя', '+77863546', '21/10/2000', 'dfgh@sg.ru', '190000 SPb'))
-Phone_book.append(Contact('Клава', '546', '14/10/2000', 'spb@sg.ru', '190000 SPb'))
+# Phone_book = []
+# Phone_book.append(Contact('Зоя', '+77863546', '21/10/2000', 'dfgh@sg.ru', '190000 SPb'))
+# Phone_book.append(Contact('Клава', '546', '14/10/2000', 'spb@sg.ru', '190000 SPb'))
 
 command = input('Введите искомую команду: ')
 
@@ -29,7 +32,9 @@ while(command != '/quit'):
         birthday = input('Введите дату рождения контакта: ') 
         email = input('Введите почту контакта: ')
         adress = input('Введите адрес контакта: ')
+        
         Phone_book.append(Contact(name, phone, birthday, email, adress))
+        save(Contact(name, phone, birthday, email, adress))
 
     elif command == '/search':
         data = input('Введите данные для поиска: ')

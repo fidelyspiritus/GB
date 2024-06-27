@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime
 
 Base = declarative_base()
 
@@ -35,6 +36,9 @@ class UserCreate(BaseModel):
     email: str
     password: str
 
+    class Config:
+        arbitrary_types_allowed = True
+
 class UserResponse(BaseModel):
     id: int
     first_name: str
@@ -43,11 +47,15 @@ class UserResponse(BaseModel):
 
     class Config:
         orm_mode = True
+        arbitrary_types_allowed = True
 
 class ProductCreate(BaseModel):
     name: str
     description: str
     price: float
+
+    class Config:
+        arbitrary_types_allowed = True
 
 class ProductResponse(BaseModel):
     id: int
@@ -57,19 +65,24 @@ class ProductResponse(BaseModel):
 
     class Config:
         orm_mode = True
+        arbitrary_types_allowed = True
 
 class OrderCreate(BaseModel):
     user_id: int
     product_id: int
-    order_date: DateTime
+    order_date: datetime
     status: str
+
+    class Config:
+        arbitrary_types_allowed = True
 
 class OrderResponse(BaseModel):
     id: int
     user_id: int
     product_id: int
-    order_date: DateTime
+    order_date: datetime
     status: str
 
     class Config:
         orm_mode = True
+        arbitrary_types_allowed = True

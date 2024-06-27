@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.orm import Session
-from .models import Base, User, Product, Order, UserCreate, UserResponse, ProductCreate, ProductResponse, OrderCreate, OrderResponse
-from .database import engine, database, metadata
+from final.models import Base, User, Product, Order, UserCreate, UserResponse, ProductCreate, ProductResponse, OrderCreate, OrderResponse
+from final.database import engine, database, metadata
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import sessionmaker
 
